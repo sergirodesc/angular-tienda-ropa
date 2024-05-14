@@ -1,0 +1,29 @@
+header {
+    background-color: #071061;
+    padding: 10px 0;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+}
+
+.search-container input[type="text"] {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.search-container button {
+    padding: 8px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #444;
+    color: #fff;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #555;
+}

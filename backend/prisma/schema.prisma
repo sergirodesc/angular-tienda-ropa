@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          Int              @id @default(autoincrement())
+  price       Decimal
+  description String?          @db.VarChar(150)
+  category    Product_category @default(PIKE)
+  sale        Boolean          @default(false)
+  image       String           @db.VarChar(250)
+}
+
+enum Product_category {
+  PIKE
+  MADIDAS
+  LACAOSTE
+}
+
+
+model User {
+  id    Int     @default(autoincrement()) @id
+  name  String?
+  email String  @unique
+  posts Post[]
+}
+
+// Define the `Post` table in the database
+model Post {
+  id        Int      @default(autoincrement()) @id
+  published Boolean? @default(false)
+  title     String
+  content   String?
+  author    User?    @relation(fields: [authorId], references: [id])
+  authorId  Int? 
+}

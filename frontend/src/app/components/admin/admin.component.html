@@ -1,0 +1,74 @@
+<div class="flex-container">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="form-container">
+        <!-- Columna 1 -->
+        <div class="column">
+            <!-- Reference -->
+            <div class="mb-4">
+                <label for="reference" class="block mb-2 text-lg font-medium text-gray-700">Reference:</label>
+                <input type="text" id="reference" formControlName="reference" class="input-field text-lg"
+                    [(ngModel)]="product.reference">
+                <p *ngIf="f.reference.invalid && (f.reference.untouched || f.reference.touched)" class="error-message text-lg">*
+                    Reference must be 3 characters + 9 numbers </p>
+            </div>
+
+            <!-- Name -->
+            <div class="mb-4">
+                <label for="name" class="block mb-2 text-lg font-medium text-gray-700">Name:</label>
+                <input type="text" id="name" formControlName="name" class="input-field text-lg" [(ngModel)]="product.name">
+                <p *ngIf="f.name.invalid && (f.name.value && f.name.value.length < 1) && (f.name.untouched || f.name.touched)"
+                    class="error-message text-lg">* Name is required</p>
+                <p *ngIf="f.name.value && f.name.value.length > 25 && (f.name.untouched || f.name.touched)"
+                    class="error-message text-lg">* Name can't be more than 25 characters</p>
+            </div>
+
+            <!-- Price -->
+            <div class="mb-4">
+                <label for="price" class="block mb-2 text-lg font-medium text-gray-700">Price:</label>
+                <input type="number" id="price" formControlName="price" class="input-field text-lg" [(ngModel)]="product.price">
+                <p *ngIf="f.price.errors?.['min']" class="error-message text-lg">* Price must be greater than 0</p>
+            </div>
+        </div>
+
+        <!-- Columna 2 -->
+        <div class="column">
+            <!-- Description -->
+            <div class="mb-4">
+                <label for="description" class="block mb-2 text-lg font-medium text-gray-700">Description:</label>
+                <textarea id="description" formControlName="description" class="input-field text-lg"
+                    [(ngModel)]="product.description"></textarea>
+                <p *ngIf="f.description.invalid && f.description.untouched" class="error-message text-lg">* Description is
+                    required</p>
+            </div>
+
+            <!-- Category -->
+            <div class="mb-4">
+                <label for="category" class="block mb-2 text-lg font-medium text-gray-700">Category:</label>
+                <select id="category" formControlName="category" class="input-field text-lg" [(ngModel)]="product.category">
+                    <option value="">Select a category</option>
+                    <option value="category1">AWS</option>
+                    <option value="category2">Netifly</option>
+                    <option value="category3">Strapi</option>
+                </select>
+                <p *ngIf="f.category.invalid && f.category.untouched" class="error-message text-lg">* Category is required</p>
+            </div>
+
+            <!-- Sale -->
+            <div class="mb-4">
+                <label for="sale" class="block mb-2 text-lg font-medium text-gray-700">Sale:</label>
+                <input type="checkbox" id="sale" formControlName="sale" class="input-field text-lg" [(ngModel)]="product.sale">
+            </div>
+
+            <!-- Image -->
+            <div class="mb-4">
+                <label for="image" class="block mb-2 text-lg font-medium text-gray-700">Image:</label>
+                <input type="text" id="image" formControlName="image" class="input-field text-lg" [(ngModel)]="product.image">
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="col-span-2 flex justify-center">
+            <button type="submit" class="button text-lg px-8 py-3" [ngClass]="{'disabled': form.invalid}"
+                [disabled]="form.invalid">Submit</button>
+        </div>
+    </form>
+</div>
